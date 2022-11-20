@@ -142,6 +142,9 @@ class HashMap:
         Clears the contents of the hash map.
         """
         self._buckets = DynamicArray()
+        # capacity must be a prime number
+        for _ in range(self._capacity):
+            self._buckets.append(LinkedList())
         self._size = 0
 
     def resize_table(self, new_capacity: int) -> None:
@@ -155,6 +158,8 @@ class HashMap:
             new_capacity = self._next_prime(new_capacity)
 
         # Recompute hash of existing keys
+        # # Rehashing all links
+        #     # @TODO: Check to see if private ref allowed
         new_hash_map = HashMap(new_capacity, self._hash_function)
         for i in range(self._buckets.length()):
             for link_node in self._buckets[i]:
@@ -163,11 +168,6 @@ class HashMap:
                 new_hash_map._buckets[index].insert(
                     link_node.key, link_node.value)
 
-        # # Rehashing all links
-        # new_hash_map = HashMap(new_capacity, self._hash_function)
-        # for index in range(self._buckets.length()):
-        #     # @TODO: Check to see if private ref allowed
-        #     new_hash_map._buckets[index] = self._buckets[index]
         self._buckets = new_hash_map._buckets
         self._capacity = new_capacity
 
