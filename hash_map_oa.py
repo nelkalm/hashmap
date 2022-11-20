@@ -160,7 +160,7 @@ class HashMap:
 
 if __name__ == "__main__":
 
-    # print("\nPDF - put example 1")
+    print("\nPDF - put example 1")
     # print("-------------------")
     # m = HashMap(53, hash_function_1)
     # for i in range(150):
