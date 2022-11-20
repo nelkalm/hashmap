@@ -204,6 +204,7 @@ class HashMap:
             if link_node.key == key:
                 match = True
                 self._buckets[index].remove(key)
+                self._size -= 1
         if match == False:
             return None
 
