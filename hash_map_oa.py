@@ -1,9 +1,11 @@
-# Name:
-# OSU Email:
+# Name: Nelson Lu
+# OSU Email: luhun@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: 6
+# Due Date: 12/2/2022
+# Description: A HashMap implementation using quadratic probing for collision resolution.
+#           It includes the following methods: put(), get(), remove(), contains_key(),
+#           clear(), empty_buckets(), resize_table(), table_load(), get_keys(), __iter__(), __next__().
 
 from a6_include import (DynamicArray, DynamicArrayException, HashEntry,
                         hash_function_1, hash_function_2)
@@ -165,21 +167,39 @@ class HashMap:
 
     def get(self, key: str) -> object:
         """
-        TODO: Write this implementation
+        Returns the value associated with the given key.
         """
-        pass
+        hash = self._hash_function(key)
+        index = hash % self._capacity
+        if self._buckets[index] is None:
+            return None
+        if self._buckets[index].is_tombstone:
+            return None
+        return self._buckets[index].value
 
     def contains_key(self, key: str) -> bool:
         """
-        TODO: Write this implementation
+        Returns True if the given key is in the hash map. False otherwise.
         """
-        pass
+        hash = self._hash_function(key)
+        index = hash % self._capacity
+        if self._buckets[index] is None:
+            return False
+        if self._buckets[index].key != key:
+            return False
+        if self._buckets[index].is_tombstone:
+            return False
+        return True
 
     def remove(self, key: str) -> None:
         """
-        TODO: Write this implementation
+        Removes the given key and its associated value from the hash map.
         """
-        pass
+        hash = self._hash_function(key)
+        index = hash % self._capacity
+        if self.contains_key(key) is False:
+            return
+        self._buckets[index].is_tombstone = True
 
     def clear(self) -> None:
         """
@@ -257,16 +277,16 @@ if __name__ == "__main__":
     # #           m.get_size(), m.get_capacity())
     # print(m)
 
-    print("\nPDF - put example 2")
-    print("-------------------")
-    m = HashMap(41, hash_function_2)
-    for i in range(50):
-        m.put('str' + str(i // 3), i * 100)
-        if i % 10 == 9:
-            print(m.empty_buckets(), round(m.table_load(), 2),
-                  m.get_size(), m.get_capacity())
-    #     print(i, m.empty_buckets(), round(m.table_load(), 2),
-    #           m.get_size(), m.get_capacity())
+    # print("\nPDF - put example 2")
+    # print("-------------------")
+    # m = HashMap(41, hash_function_2)
+    # for i in range(50):
+    #     m.put('str' + str(i // 3), i * 100)
+    #     if i % 10 == 9:
+    #         print(m.empty_buckets(), round(m.table_load(), 2),
+    #               m.get_size(), m.get_capacity())
+    # #     print(i, m.empty_buckets(), round(m.table_load(), 2),
+    # #           m.get_size(), m.get_capacity())
 
     # print("\nPDF - table_load example 1")
     # print("--------------------------")
@@ -359,44 +379,44 @@ if __name__ == "__main__":
     #     print(i, m.get(str(i)), m.get(str(i)) == i * 10)
     #     print(i + 1, m.get(str(i + 1)), m.get(str(i + 1)) == (i + 1) * 10)
 
-    # print("\nPDF - contains_key example 1")
-    # print("----------------------------")
-    # m = HashMap(11, hash_function_1)
-    # print(m.contains_key('key1'))
-    # m.put('key1', 10)
-    # m.put('key2', 20)
-    # m.put('key3', 30)
-    # print(m.contains_key('key1'))
-    # print(m.contains_key('key4'))
-    # print(m.contains_key('key2'))
-    # print(m.contains_key('key3'))
-    # m.remove('key3')
-    # print(m.contains_key('key3'))
+    print("\nPDF - contains_key example 1")
+    print("----------------------------")
+    m = HashMap(11, hash_function_1)
+    print(m.contains_key('key1'))
+    m.put('key1', 10)
+    m.put('key2', 20)
+    m.put('key3', 30)
+    print(m.contains_key('key1'))
+    print(m.contains_key('key4'))
+    print(m.contains_key('key2'))
+    print(m.contains_key('key3'))
+    m.remove('key3')
+    print(m.contains_key('key3'))
 
-    # print("\nPDF - contains_key example 2")
-    # print("----------------------------")
-    # m = HashMap(79, hash_function_2)
-    # keys = [i for i in range(1, 1000, 20)]
-    # for key in keys:
-    #     m.put(str(key), key * 42)
-    # print(m.get_size(), m.get_capacity())
-    # result = True
-    # for key in keys:
-    #     # all inserted keys must be present
-    #     result &= m.contains_key(str(key))
-    #     # NOT inserted keys must be absent
-    #     result &= not m.contains_key(str(key + 1))
-    # print(result)
+    print("\nPDF - contains_key example 2")
+    print("----------------------------")
+    m = HashMap(79, hash_function_2)
+    keys = [i for i in range(1, 1000, 20)]
+    for key in keys:
+        m.put(str(key), key * 42)
+    print(m.get_size(), m.get_capacity())
+    result = True
+    for key in keys:
+        # all inserted keys must be present
+        result &= m.contains_key(str(key))
+        # NOT inserted keys must be absent
+        result &= not m.contains_key(str(key + 1))
+    print(result)
 
-    # print("\nPDF - remove example 1")
-    # print("----------------------")
-    # m = HashMap(53, hash_function_1)
-    # print(m.get('key1'))
-    # m.put('key1', 10)
-    # print(m.get('key1'))
-    # m.remove('key1')
-    # print(m.get('key1'))
-    # m.remove('key4')
+    print("\nPDF - remove example 1")
+    print("----------------------")
+    m = HashMap(53, hash_function_1)
+    print(m.get('key1'))
+    m.put('key1', 10)
+    print(m.get('key1'))
+    m.remove('key1')
+    print(m.get('key1'))
+    m.remove('key4')
 
     # print("\nPDF - clear example 1")
     # print("---------------------")
