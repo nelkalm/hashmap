@@ -89,7 +89,22 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+
+        # Compute initial index
+        hash = self._hash_function(key)
+        index = hash % self._capacity
+
+        # If the hash table array at initial index is empty, insert the element there and stop
+        if self._buckets[index] == None:
+            self._buckets[index] = value
+            self._size += 1
+        else:
+            j = 1
+            while self._buckets[index] != None:
+                index = (index + j ** 2) % self._capacity
+                j += 1
+            self._buckets[index] = value
+            self._size += 1
 
     def table_load(self) -> float:
         """
@@ -111,7 +126,22 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        if new_capacity < 1:
+            return
+
+        if self._is_prime(new_capacity) is False:
+            new_capacity = self._next_prime(new_capacity)
+
+        # new_hash_map = HashMap(new_capacity, self._hash_function)
+        # initialize new buckets
+        new_buckets = DynamicArray()
+        for _ in range(new_capacity):
+            new_buckets.append(None)
+
+        for i in range(self._buckets.length()):
+            if self._buckets is not None:
+                hash = self._hash_function(key)
+                index = hash % self._capacity
 
     def get(self, key: str) -> object:
         """
@@ -161,12 +191,13 @@ class HashMap:
 if __name__ == "__main__":
 
     print("\nPDF - put example 1")
-    # print("-------------------")
-    # m = HashMap(53, hash_function_1)
-    # for i in range(150):
-    #     m.put('str' + str(i), i * 100)
-    #     if i % 25 == 24:
-    #         print(m.empty_buckets(), round(m.table_load(), 2), m.get_size(), m.get_capacity())
+    print("-------------------")
+    m = HashMap(53, hash_function_1)
+    for i in range(150):
+        m.put('str' + str(i), i * 100)
+        if i % 25 == 24:
+            print(m.empty_buckets(), round(m.table_load(), 2),
+                  m.get_size(), m.get_capacity())
 
     # print("\nPDF - put example 2")
     # print("-------------------")
