@@ -234,14 +234,16 @@ if __name__ == "__main__":
     # print(m.empty_buckets(), round(m.table_load(), 2),
     #       m.get_size(), m.get_capacity())
 
-    print("\nPDF - put example 1")
-    print("-------------------")
-    m = HashMap(53, hash_function_1)
-    for i in range(150):
-        m.put('str' + str(i), i * 100)
-        if i % 25 == 24:
-            print(m.empty_buckets(), round(m.table_load(), 2),
-                  m.get_size(), m.get_capacity())
+    # print("\nPDF - put example 1")
+    # print("-------------------")
+    # m = HashMap(53, hash_function_1)
+    # for i in range(150):
+    #     m.put('str' + str(i), i * 100)
+    #     if i % 25 == 24:
+    #         print(m.empty_buckets(), round(m.table_load(), 2),
+    #               m.get_size(), m.get_capacity())
+    #     # print(m.empty_buckets(), round(m.table_load(), 2),
+    #     #       m.get_size(), m.get_capacity())
 
     print("\nPDF - put example 2")
     print("-------------------")
