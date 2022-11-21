@@ -102,10 +102,14 @@ class HashMap:
         if self._buckets[index] == None:
             self._buckets[index] = HashEntry(key, value)
             self._size += 1
+
+        # If the key exists, replace with new value
+        elif self._buckets[index].key == key:
+            self._buckets[index].value = value
         else:
             j = 1
-            while self._buckets[index] != None:
-                index = (index + j ** 2) % self._capacity
+            while self._buckets[index] is not None and self._buckets[index].key != key:
+                index = (index + (j * j)) % self._capacity
                 j += 1
             self._buckets[index] = HashEntry(key, value)
             self._size += 1
@@ -198,6 +202,32 @@ class HashMap:
 
 if __name__ == "__main__":
 
+    # print("\nMy Test")
+    # print("-------------------")
+    # m = HashMap(5, hash_function_2)
+    # print(m)
+    # print("\nAdding str100 to the map")
+    # hash = hash_function_2('str100')
+    # print(hash)
+    # m.put("str100", 100)
+    # print(m)
+    # print(m.empty_buckets(), round(m.table_load(), 2),
+    #       m.get_size(), m.get_capacity())
+    # m.put("str200", 200)
+    # m.put("str300", 300)
+    # print(m)
+    # print(m.empty_buckets(), round(m.table_load(), 2),
+    #       m.get_size(), m.get_capacity())
+    # m.put("str100", 1000)
+    # print(m)
+    # print(m.empty_buckets(), round(m.table_load(), 2),
+    #       m.get_size(), m.get_capacity())
+    # m.put("str400", 400)
+    # m.put("str500", 500)
+    # print(m)
+    # print(m.empty_buckets(), round(m.table_load(), 2),
+    #       m.get_size(), m.get_capacity())
+
     # print("\nPDF - put example 1")
     # print("-------------------")
     # m = HashMap(53, hash_function_1)
@@ -207,35 +237,35 @@ if __name__ == "__main__":
     #         print(m.empty_buckets(), round(m.table_load(), 2),
     #               m.get_size(), m.get_capacity())
 
-    print("\nPDF - put example 2")
-    print("-------------------")
-    m = HashMap(41, hash_function_2)
-    for i in range(50):
-        m.put('str' + str(i // 3), i * 100)
-        # if i % 10 == 9:
-        #     print(m.empty_buckets(), round(m.table_load(), 2),
-        #           m.get_size(), m.get_capacity())
-        print(m.empty_buckets(), round(m.table_load(), 2),
-              m.get_size(), m.get_capacity())
-
-    # print("\nPDF - table_load example 1")
-    # print("--------------------------")
-    # m = HashMap(101, hash_function_1)
-    # print(round(m.table_load(), 2))
-    # m.put('key1', 10)
-    # print(round(m.table_load(), 2))
-    # m.put('key2', 20)
-    # print(round(m.table_load(), 2))
-    # m.put('key1', 30)
-    # print(round(m.table_load(), 2))
-
-    # print("\nPDF - table_load example 2")
-    # print("--------------------------")
-    # m = HashMap(53, hash_function_1)
+    # print("\nPDF - put example 2")
+    # print("-------------------")
+    # m = HashMap(41, hash_function_2)
     # for i in range(50):
-    #     m.put('key' + str(i), i * 100)
-    #     if i % 10 == 0:
-    #         print(round(m.table_load(), 2), m.get_size(), m.get_capacity())
+    #     m.put('str' + str(i // 3), i * 100)
+    #     if i % 10 == 9:
+    #         print(m.empty_buckets(), round(m.table_load(), 2),
+    #               m.get_size(), m.get_capacity())
+    #     # print(i, m.empty_buckets(), round(m.table_load(), 2),
+    #     #       m.get_size(), m.get_capacity())
+
+    print("\nPDF - table_load example 1")
+    print("--------------------------")
+    m = HashMap(101, hash_function_1)
+    print(round(m.table_load(), 2))
+    m.put('key1', 10)
+    print(round(m.table_load(), 2))
+    m.put('key2', 20)
+    print(round(m.table_load(), 2))
+    m.put('key1', 30)
+    print(round(m.table_load(), 2))
+
+    print("\nPDF - table_load example 2")
+    print("--------------------------")
+    m = HashMap(53, hash_function_1)
+    for i in range(50):
+        m.put('key' + str(i), i * 100)
+        if i % 10 == 0:
+            print(round(m.table_load(), 2), m.get_size(), m.get_capacity())
 
     # print("\nPDF - empty_buckets example 1")
     # print("-----------------------------")
