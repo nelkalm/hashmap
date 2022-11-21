@@ -109,16 +109,17 @@ class HashMap:
         else:
             # Probe until we find either the element we’re looking for, or an empty spot
             j = 1
-            while self._buckets[index] is not None and self._buckets[index].key != key:
-                index = (index + (j ** 2)) % self._capacity
+            index_qp = (index + (j ** 2)) % self._capacity
+            while self._buckets[index_qp] is not None and self._buckets[index_qp].key != key:
+                index_qp = (index + (j ** 2)) % self._capacity
                 j += 1
             # If spot is empty, create hash entry
-            if self._buckets[index] is None:
-                self._buckets[index] = HashEntry(key, value)
+            if self._buckets[index_qp] is None:
+                self._buckets[index_qp] = HashEntry(key, value)
                 self._size += 1
             # If not, replace with new value
             else:
-                self._buckets[index].value = value
+                self._buckets[index_qp].value = value
 
     def table_load(self) -> float:
         """
@@ -235,15 +236,14 @@ if __name__ == "__main__":
     # print(m.empty_buckets(), round(m.table_load(), 2),
     #       m.get_size(), m.get_capacity())
 
-    print("\nPDF - put test example")
-    print("-------------------")
-    m = HashMap(53, hash_function_1)
-    for i in range(15):
-        m.put('str' + str(i), i * 100)
-        print(m.empty_buckets(), round(m.table_load(), 2),
-              m.get_size(), m.get_capacity())
-    print(m)
-    print(hash_function_1("str14") % m._capacity)
+    # print("\nPDF - put test example")
+    # print("-------------------")
+    # m = HashMap(53, hash_function_1)
+    # for i in range(15):
+    #     m.put('str' + str(i), i * 100)
+    #     print(m.empty_buckets(), round(m.table_load(), 2),
+    #           m.get_size(), m.get_capacity())
+    # print(m)
 
     # print("\nPDF - put example 1")
     # print("-------------------")
@@ -257,14 +257,14 @@ if __name__ == "__main__":
     # #           m.get_size(), m.get_capacity())
     # print(m)
 
-    # print("\nPDF - put example 2")
-    # print("-------------------")
-    # m = HashMap(41, hash_function_2)
-    # for i in range(50):
-    #     m.put('str' + str(i // 3), i * 100)
-    #     # if i % 10 == 9:
-    #     #     print(m.empty_buckets(), round(m.table_load(), 2),
-    #     #           m.get_size(), m.get_capacity())
+    print("\nPDF - put example 2")
+    print("-------------------")
+    m = HashMap(41, hash_function_2)
+    for i in range(50):
+        m.put('str' + str(i // 3), i * 100)
+        if i % 10 == 9:
+            print(m.empty_buckets(), round(m.table_load(), 2),
+                  m.get_size(), m.get_capacity())
     #     print(i, m.empty_buckets(), round(m.table_load(), 2),
     #           m.get_size(), m.get_capacity())
 
