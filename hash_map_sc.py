@@ -1,9 +1,13 @@
-# Name:
-# OSU Email:
+# Name: Nelson Lu
+# OSU Email: luhun@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: 6
+# Due Date: 12/2/2022
+# Description: A HashMap implementation using separate chaining for collision resolution.
+#           It includes the following methods: put(), get(), remove(), contains_key(),
+#           clear(), empty_buckets(), resize_table(), table_load(), get_keys().
+#          It also includes a separate find_mode() function using a HashMap to find
+#           the mode of an array.
 
 
 from a6_include import (DynamicArray, LinkedList, SLNode,
@@ -91,8 +95,8 @@ class HashMap:
     def put(self, key: str, value: object) -> None:
         """
         Updates the key/value pair in the hash map. If the given key already exists in
-        the hash map, its associated value must be replaced with the new value. If the given key is
-        not in the hash map, a new key/value pair must be added.
+        the hash map, its associated value is replaced with the new value. If the given key is
+        not in the hash map, a new key/value pair is added.
         """
         if self.table_load() >= 1:
             self.resize_table(self._capacity * 2)
@@ -159,7 +163,6 @@ class HashMap:
 
         # Recompute hash of existing keys
         # # Rehashing all links
-        # new_hash_map = HashMap(new_capacity, self._hash_function)
 
         new_buckets = DynamicArray()
         for _ in range(new_capacity):
@@ -172,12 +175,7 @@ class HashMap:
 
         for i in range(old_buckets.length()):
             for link_node in old_buckets[i]:
-                # hash = self._hash_function(link_node.key)
-                # index = hash % new_capacity
                 self.put(link_node.key, link_node.value)
-                # self._buckets[index].insert(
-                #     link_node.key, link_node.value)
-        # self._buckets = new_buckets
 
     def get(self, key: str):
         """
