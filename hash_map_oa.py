@@ -200,6 +200,7 @@ class HashMap:
         if self.contains_key(key) is False:
             return
         self._buckets[index].is_tombstone = True
+        self._size -= 1
 
     def clear(self) -> None:
         """
