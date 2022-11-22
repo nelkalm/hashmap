@@ -262,9 +262,15 @@ class HashMap:
 
     def get_keys_and_values(self) -> DynamicArray:
         """
-        TODO: Write this implementation
+        Returns a dynamic array where each index contains a tuple of a key/value pair
+        stored in the hash map.
         """
-        pass
+        output_da = DynamicArray()
+        for i in range(self._buckets.length()):
+            if self._buckets[i] is not None:
+                output_da.append(
+                    (self._buckets[i].key, self._buckets[i].value))
+        return output_da
 
     def __iter__(self):
         """
@@ -501,44 +507,44 @@ if __name__ == "__main__":
     # print(m.get('key1'))
     # m.remove('key4')
 
-    print("\nPDF - clear example 1")
-    print("---------------------")
-    m = HashMap(101, hash_function_1)
-    print(m.get_size(), m.get_capacity())
-    m.put('key1', 10)
-    m.put('key2', 20)
-    m.put('key1', 30)
-    print(m.get_size(), m.get_capacity())
-    m.clear()
-    print(m.get_size(), m.get_capacity())
+    # print("\nPDF - clear example 1")
+    # print("---------------------")
+    # m = HashMap(101, hash_function_1)
+    # print(m.get_size(), m.get_capacity())
+    # m.put('key1', 10)
+    # m.put('key2', 20)
+    # m.put('key1', 30)
+    # print(m.get_size(), m.get_capacity())
+    # m.clear()
+    # print(m.get_size(), m.get_capacity())
 
-    print("\nPDF - clear example 2")
-    print("---------------------")
-    m = HashMap(53, hash_function_1)
-    print(m.get_size(), m.get_capacity())
-    m.put('key1', 10)
-    print(m.get_size(), m.get_capacity())
-    m.put('key2', 20)
-    print(m.get_size(), m.get_capacity())
-    m.resize_table(100)
-    print(m.get_size(), m.get_capacity())
-    m.clear()
-    print(m.get_size(), m.get_capacity())
+    # print("\nPDF - clear example 2")
+    # print("---------------------")
+    # m = HashMap(53, hash_function_1)
+    # print(m.get_size(), m.get_capacity())
+    # m.put('key1', 10)
+    # print(m.get_size(), m.get_capacity())
+    # m.put('key2', 20)
+    # print(m.get_size(), m.get_capacity())
+    # m.resize_table(100)
+    # print(m.get_size(), m.get_capacity())
+    # m.clear()
+    # print(m.get_size(), m.get_capacity())
 
-    # print("\nPDF - get_keys_and_values example 1")
-    # print("------------------------")
-    # m = HashMap(11, hash_function_2)
-    # for i in range(1, 6):
-    #     m.put(str(i), str(i * 10))
-    # print(m.get_keys_and_values())
+    print("\nPDF - get_keys_and_values example 1")
+    print("------------------------")
+    m = HashMap(11, hash_function_2)
+    for i in range(1, 6):
+        m.put(str(i), str(i * 10))
+    print(m.get_keys_and_values())
 
-    # m.resize_table(2)
-    # print(m.get_keys_and_values())
+    m.resize_table(2)
+    print(m.get_keys_and_values())
 
-    # m.put('20', '200')
-    # m.remove('1')
-    # m.resize_table(12)
-    # print(m.get_keys_and_values())
+    m.put('20', '200')
+    m.remove('1')
+    m.resize_table(12)
+    print(m.get_keys_and_values())
 
     # print("\nPDF - __iter__(), __next__() example 1")
     # print("---------------------")
