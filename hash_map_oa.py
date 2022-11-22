@@ -7,8 +7,6 @@
 #           It includes the following methods: put(), get(), remove(), contains_key(),
 #           clear(), empty_buckets(), resize_table(), table_load(), get_keys(), __iter__(), __next__().
 
-# @TODO: remove random module
-import random
 
 from a6_include import (DynamicArray, DynamicArrayException, HashEntry,
                         hash_function_1, hash_function_2)
@@ -246,6 +244,8 @@ class HashMap:
         index = hash % self._capacity
         # if self.contains_key(key) is False:
         #     return
+        if self._buckets[index] is None:
+            return
         if self._buckets[index].key == key:
             self._buckets[index].is_tombstone = True
             self._size -= 1
