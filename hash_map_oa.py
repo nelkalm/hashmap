@@ -187,7 +187,7 @@ class HashMap:
                 # Probe until we find either the element we’re looking for, or an empty spot
                 j = 1
                 index_qp = (index + (j ** 2)) % self._capacity
-                while self._buckets[index_qp].key != key:
+                while self._buckets[index_qp] is not None and self._buckets[index_qp].key != key:
                     index_qp = (index + (j ** 2)) % self._capacity
                     j += 1
 
@@ -401,13 +401,26 @@ if __name__ == "__main__":
     #     print(i, m.get(str(i)), m.get(str(i)) == i * 10)
     #     print(i + 1, m.get(str(i + 1)), m.get(str(i + 1)) == (i + 1) * 10)
 
-    print("\nPDF - get example 1")
+    # print("\nPDF - get example 1")
+    # print("-------------------")
+    # m = HashMap(31, hash_function_1)
+    # print(m.get('key3982890'))
+    # m.put('key1', 10)
+    # print(m.get('key1'))
+    # print(hash_function_1('key3982890') % 107)
+
+    print("\nPDF - get example 2")
     print("-------------------")
-    m = HashMap(31, hash_function_1)
-    print(m.get('key3982890'))
-    m.put('key1', 10)
-    print(m.get('key1'))
-    print(hash_function_1('key3982890') % 107)
+    m = HashMap(151, hash_function_2)
+    for i in range(10, 300, 7):
+        m.put('key' + str(i), i * 10)
+    print(m)
+    m.get('key9481683')
+    print(m.get('key9481683'))
+    # print(m.get_size(), m.get_capacity())
+    # for i in range(200, 300, 21):
+    #     print(i, m.get(str(i)), m.get(str(i)) == i * 10)
+    #     print(i + 1, m.get(str(i + 1)), m.get(str(i + 1)) == (i + 1) * 10)
 
     # print("\nPDF - contains_key example 1")
     # print("----------------------------")
