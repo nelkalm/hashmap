@@ -211,9 +211,7 @@ class HashMap:
             return False
 
         if self._buckets[index] is not None:
-            if self._buckets[index].key != key:
-                return False
-            elif self._buckets[index].key == key:
+            if self._buckets[index].key == key:
                 return True
             else:
                 # Probe until we find either the element we’re looking for, or an empty spot
@@ -439,6 +437,15 @@ if __name__ == "__main__":
     # for i in range(200, 300, 21):
     #     print(i, m.get(str(i)), m.get(str(i)) == i * 10)
     #     print(i + 1, m.get(str(i + 1)), m.get(str(i + 1)) == (i + 1) * 10)
+
+    # print("\nPDF - self example")
+    # print("-------------------")
+    # m = HashMap(151, hash_function_2)
+    # for i in range(10, 300, 7):
+    #     m.put(str(i), i * 10)
+    # print(m)
+
+    # print(m.contains_key('234'))
 
     print("\nPDF - contains_key example 1")
     print("----------------------------")
