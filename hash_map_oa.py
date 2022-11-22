@@ -258,6 +258,8 @@ class HashMap:
                 j += 1
             if self._buckets[index_qp].key is None:
                 return
+            if self._buckets[index_qp].key != key:
+                return
             if self._buckets[index_qp].key == key:
                 self._buckets[index_qp].is_tombstone = True
                 self._size -= 1
