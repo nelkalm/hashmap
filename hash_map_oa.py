@@ -108,6 +108,8 @@ class HashMap:
         # If the key exists, replace with new value
         elif self._buckets[index].key == key:
             self._buckets[index].value = value
+            if self._buckets[index].is_tombstone is True:
+                self._buckets[index].is_tombstone = False
         else:
             # Probe until we find either the element we’re looking for, or an empty spot
             j = 1
@@ -122,6 +124,8 @@ class HashMap:
             # If not, replace with new value
             else:
                 self._buckets[index_qp].value = value
+                if self._buckets[index_qp].is_tombstone is True:
+                    self._buckets[index_qp].is_tombstone = False
 
     def table_load(self) -> float:
         """
