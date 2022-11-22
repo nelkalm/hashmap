@@ -163,7 +163,8 @@ class HashMap:
 
         for i in range(old_buckets.length()):
             if old_buckets[i] is not None:
-                self.put(old_buckets[i].key, old_buckets[i].value)
+                if old_buckets[i].is_tombstone is False:
+                    self.put(old_buckets[i].key, old_buckets[i].value)
 
     def get(self, key: str) -> object:
         """
@@ -267,7 +268,7 @@ class HashMap:
         """
         output_da = DynamicArray()
         for i in range(self._buckets.length()):
-            if self._buckets[i] is not None:
+            if self._buckets[i] is not None and self._buckets[i].is_tombstone == False:
                 output_da.append(
                     (self._buckets[i].key, self._buckets[i].value))
         return output_da
@@ -543,8 +544,25 @@ if __name__ == "__main__":
 
     m.put('20', '200')
     m.remove('1')
+    print(m)
     m.resize_table(12)
+    print()
+    print(m)
     print(m.get_keys_and_values())
+
+    # print("\nPDF - additional remove test 1")
+    # print("------------------------")
+    # m = HashMap(11, hash_function_2)
+    # for i in range(1, 6):
+    #     m.put(str(i), str(i * 10))
+    # print(m)
+
+    # m.resize_table(2)
+    # print(m)
+    # m.put('20', '200')
+    # print(m)
+    # m.remove('1')
+    # print(m)
 
     # print("\nPDF - __iter__(), __next__() example 1")
     # print("---------------------")
