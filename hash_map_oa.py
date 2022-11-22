@@ -110,6 +110,7 @@ class HashMap:
             self._buckets[index].value = value
             if self._buckets[index].is_tombstone is True:
                 self._buckets[index].is_tombstone = False
+                self._size += 1
         else:
             # Probe until we find either the element we’re looking for, or an empty spot
             j = 1
@@ -126,6 +127,7 @@ class HashMap:
                 self._buckets[index_qp].value = value
                 if self._buckets[index_qp].is_tombstone is True:
                     self._buckets[index_qp].is_tombstone = False
+                    self._size += 1
 
     def table_load(self) -> float:
         """
