@@ -191,11 +191,11 @@ class HashMap:
                     index_qp = (index + (j ** 2)) % self._capacity
                     j += 1
 
-                if self._buckets[index_qp] is None:
-                    return None
+                # if self._buckets[index_qp] is None or self._buckets[index_qp].key != key:
+                #     return None
                 if self._buckets[index_qp].key == key:
                     return self._buckets[index_qp].value
-                if self._buckets[index_qp].key != key:
+                else:
                     return None
 
     def contains_key(self, key: str) -> bool:
