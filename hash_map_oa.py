@@ -258,7 +258,7 @@ class HashMap:
             while self._buckets[index_qp] is not None and self._buckets[index_qp].key != key:
                 index_qp = (index + (j ** 2)) % self._capacity
                 j += 1
-            if self._buckets[index_qp].key is None:
+            if self._buckets[index_qp] is None:
                 return
             if self._buckets[index_qp].key != key:
                 return
@@ -642,6 +642,9 @@ if __name__ == "__main__":
     # print(f'capacity {m.get_capacity()}, size {m.get_size()}')
     # # print(m)
 
+    # print("\nGS Typed Out")
+    # print(hash_function_1('key5851827') % 223)
+
     print("\nGS Typed Out")
     m = HashMap(106, hash_function_1)
     m.put('key' + '15', 85)
@@ -685,8 +688,11 @@ if __name__ == "__main__":
     print(f'capacity {m.get_capacity()}, size {m.get_size()}')
     print(m)
 
-    print('remove(key375)')
-    m.remove('key375')
+    # print('remove(key375)')
+    # m.remove('key375')
+
+    print('remove(key5851827)')
+    m.remove('key5851827')
     print(f'capacity {m.get_capacity()}, size {m.get_size()}')
     print(m)
 
