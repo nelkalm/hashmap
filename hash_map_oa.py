@@ -247,6 +247,8 @@ class HashMap:
         if self._buckets[index] is None:
             return
         if self._buckets[index].key == key:
+            if self._buckets[index].is_tombstone is True:
+                return
             self._buckets[index].is_tombstone = True
             self._size -= 1
         else:
@@ -261,6 +263,8 @@ class HashMap:
             if self._buckets[index_qp].key != key:
                 return
             if self._buckets[index_qp].key == key:
+                if self._buckets[index_qp].is_tombstone is True:
+                    return
                 self._buckets[index_qp].is_tombstone = True
                 self._size -= 1
 
