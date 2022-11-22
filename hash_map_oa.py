@@ -7,6 +7,9 @@
 #           It includes the following methods: put(), get(), remove(), contains_key(),
 #           clear(), empty_buckets(), resize_table(), table_load(), get_keys(), __iter__(), __next__().
 
+# @TODO: remove random module
+import random
+
 from a6_include import (DynamicArray, DynamicArrayException, HashEntry,
                         hash_function_1, hash_function_2)
 
@@ -253,7 +256,8 @@ class HashMap:
             while self._buckets[index_qp] is not None and self._buckets[index_qp].key != key:
                 index_qp = (index + (j ** 2)) % self._capacity
                 j += 1
-
+            if self._buckets[index_qp].key is None:
+                return
             if self._buckets[index_qp].key == key:
                 self._buckets[index_qp].is_tombstone = True
                 self._size -= 1
@@ -283,9 +287,6 @@ class HashMap:
         """
         Creates iterator for loop.
         """
-        # self.index = 0
-        # self.item = self._buckets[self.index]
-        # return self.item
         self.index = 0
         return self
 
@@ -293,17 +294,6 @@ class HashMap:
         """
         Obtains next value and advances iterator.
         """
-        # if self._buckets[self.index] is not None:
-        #     item = self._buckets[self.index]
-        #     self.index += 1
-        #     return item
-        # else:
-        #     raise StopIteration
-
-        # try:
-        #     bucket = self._buckets[self.index]
-        # except DynamicArrayException:
-        #     raise StopIteration
         current_bucket = self._buckets[self.index]
 
         if self.index > self._buckets.length() - 1:
@@ -611,11 +601,51 @@ if __name__ == "__main__":
     # print(m)
     # print(m.get_keys_and_values())
 
-    # print("\nPDF - additional remove test 1")
-    # print("------------------------")
-    # m = HashMap(40, hash_function_2)
-    # for i in range(20, 50, 1):
-    #     m.put('key' + str(i), str(i * 2))
+    print("\nPDF - additional remove test with random values")
+    print("------------------------")
+    m = HashMap(30, hash_function_1)
+    for i in range(40):
+        r_n = random.randrange(-1000, 1000, 39)
+        m.put('key' + str(abs(r_n)), r_n)
+        # if r_n % 2 == 0:
+        #     m.remove('key' + str(abs(r_n)))
+    # print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    # m2 = m
+    # print(m2)
+    # m2.put('key' + str(200), 200)
+    # print(m2)
+    # print(m)
+    print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    print(m)
+    for i in range(10):
+        m.put('key' + str(i * 100), i * 100)
+    print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    print(m)
+    for i in range(10):
+        m.remove('key' + str(i * 100))
+    print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    print(m)
+
+    m.put('key797', -797)
+    print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    print(m)
+
+    m.remove('key797')
+    print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    print(m)
+    # for item in m:
+    #     if item.value % 2 == 0:
+    #         m.remove(item.key)
+    # # print(m)
+    # m2 = m
+    # print(f'capacity {m2.get_capacity()}, size {m2.get_size()}')
+    # print(m2)
+    # m2.remove('key727')
+    # print(f'capacity {m2.get_capacity()}, size {m2.get_size()}')
+    # print(m2)
+    # print(hash_function_1('key375') % 107)
+    # m.remove('key493')
+    # print(f'capacity {m.get_capacity()}, size {m.get_size()}')
     # print(m)
     # print(m.get_size(), m.get_capacity())
     # print(m.contains_key('key26'))
@@ -645,13 +675,13 @@ if __name__ == "__main__":
     # for item in m:
     #     print('K:', item.key, 'V:', item.value)
 
-    print("\nPDF - __iter__(), __next__() example 2")
-    print("---------------------")
-    m = HashMap(10, hash_function_2)
-    for i in range(5):
-        m.put(str(i), str(i * 24))
-    m.remove('0')
-    m.remove('4')
-    print(m)
-    for item in m:
-        print('K:', item.key, 'V:', item.value)
+    # print("\nPDF - __iter__(), __next__() example 2")
+    # print("---------------------")
+    # m = HashMap(10, hash_function_2)
+    # for i in range(5):
+    #     m.put(str(i), str(i * 24))
+    # m.remove('0')
+    # m.remove('4')
+    # print(m)
+    # for item in m:
+    #     print('K:', item.key, 'V:', item.value)
