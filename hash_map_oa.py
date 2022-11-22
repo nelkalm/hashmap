@@ -244,8 +244,8 @@ class HashMap:
         """
         hash = self._hash_function(key)
         index = hash % self._capacity
-        if self.contains_key(key) is False:
-            return
+        # if self.contains_key(key) is False:
+        #     return
         if self._buckets[index].key == key:
             self._buckets[index].is_tombstone = True
             self._size -= 1
@@ -603,38 +603,96 @@ if __name__ == "__main__":
     # print(m)
     # print(m.get_keys_and_values())
 
-    print("\nPDF - additional remove test with random values")
-    print("------------------------")
-    m = HashMap(30, hash_function_1)
-    for i in range(40):
-        r_n = random.randrange(-1000, 1000, 39)
-        m.put('key' + str(abs(r_n)), r_n)
-        # if r_n % 2 == 0:
-        #     m.remove('key' + str(abs(r_n)))
+    # print("\nPDF - additional remove test with random values")
+    # print("------------------------")
+    # m = HashMap(30, hash_function_1)
+    # for i in range(40):
+    #     r_n = random.randrange(-1000, 1000, 39)
+    #     m.put('key' + str(abs(r_n)), r_n)
+    #     # if r_n % 2 == 0:
+    #     #     m.remove('key' + str(abs(r_n)))
+    # # print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    # # m2 = m
+    # # print(m2)
+    # # m2.put('key' + str(200), 200)
+    # # print(m2)
+    # # print(m)
     # print(f'capacity {m.get_capacity()}, size {m.get_size()}')
-    # m2 = m
-    # print(m2)
-    # m2.put('key' + str(200), 200)
-    # print(m2)
     # print(m)
-    print(f'capacity {m.get_capacity()}, size {m.get_size()}')
-    print(m)
-    for i in range(10):
-        m.put('key' + str(i * 100), i * 100)
-    print(f'capacity {m.get_capacity()}, size {m.get_size()}')
-    print(m)
-    for i in range(10):
-        m.remove('key' + str(i * 100))
+    # for i in range(10):
+    #     m.put('key' + str(i * 100), i * 100)
+    # print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    # print(m)
+    # for i in range(10):
+    #     m.remove('key' + str(i * 100))
+    # print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    # print(m)
+
+    # m.resize_table(137)
+    # m.put('key797', -797)
+    # print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    # m.resize_table(137)
+    # # print(m)
+
+    # m.remove('key797')
+    # print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    # # print(m)
+
+    print("\nGS Typed Out")
+    m = HashMap(106, hash_function_1)
+    m.put('key' + '15', 85)
+    m.remove('key15')
+    m.put('key' + '49', -182)
+    m.put('key' + '420', -463)
+    m.put('key' + '234', -133)
+    m.put('key' + '901', -287)
+    m.remove('key901')
+    m.put('key' + '173', -448)
+    m.put('key' + '155', 281)
+    m.put('key' + '454', -267)
+    m.put('key' + '167', 256)
+    m.put('key' + '906', 2)
+    m.remove('key906')
+    m.put('key' + '358', 554)
+    m.remove('key358')
+    m.put('key' + '728', 6941)
+    m.put('key' + '558', -841)
+    m.remove('key558')
+    m.put('key' + '397', 248)
+    m.remove('key397')
+    m.put('key' + '817', 360)
+    m.put('key' + '849', -469)
+    m.put('key' + '886', -429)
+    m.put('key' + '896', 810)
+    m.remove('key896')
+    m.put('key' + '375', -526)
+    m.put('key' + '565', -892)
+    m.put('key' + '889', 121)
+    m.put('key' + '477', 1000)
+    m.put('key' + '663', -942)
+    m.put('key' + '790', -963)
+    m.put('key' + '819', 400)
+    m.put('key' + '623', 32)
+    m.put('key' + '186', 835)
+    m.put('key' + '207', 392)
+    m.put('key' + '515', -717)
+    m.put('key' + '537', -337)
+
     print(f'capacity {m.get_capacity()}, size {m.get_size()}')
     print(m)
 
-    m.put('key797', -797)
+    print('remove(key375)')
+    m.remove('key375')
     print(f'capacity {m.get_capacity()}, size {m.get_size()}')
     print(m)
 
-    m.remove('key797')
-    print(f'capacity {m.get_capacity()}, size {m.get_size()}')
-    print(m)
+    # m.put('key797', -797)
+    # print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    # # print(m)
+
+    # m.remove('key797')
+    # print(f'capacity {m.get_capacity()}, size {m.get_size()}')
+    # print(m)
     # for item in m:
     #     if item.value % 2 == 0:
     #         m.remove(item.key)
