@@ -191,7 +191,7 @@ class HashMap:
                     index_qp = (index + (j ** 2)) % self._capacity
                     j += 1
 
-                if self._buckets[index_qp].key is None:
+                if self._buckets[index_qp] is None:
                     return None
                 if self._buckets[index_qp].key == key:
                     return self._buckets[index_qp].value
